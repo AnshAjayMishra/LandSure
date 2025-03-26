@@ -1,21 +1,20 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import AboutUs from "@/components/otherui/AboutUs";
+import Hero from "@/components/otherui/Hero";
+import { WorldMapDemo } from "@/components/ui/WorldMapDemo";
+import Footer from "@/components/otherui/Footer";
+import { InfiniteMovingCardsDemo } from "@/components/otherui/InfiniteMovingCardsDemo";
 import React from "react";
+import ContactUs from "@/components/otherui/Contactus";
 
 function page() {
   return (
     <div>
-      <SignedOut>
-        <SignInButton mode="modal" />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+      <Hero />
+      <WorldMapDemo />
+      <AboutUs />
+      <InfiniteMovingCardsDemo />
+      <ContactUs/>
+      <Footer />
     </div>
   );
 }

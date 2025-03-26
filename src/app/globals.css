@@ -3,6 +3,8 @@
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
+@import 'leaflet/dist/leaflet.css';
+
 
 @theme inline {
   --color-background: var(--background);
@@ -45,6 +47,14 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+
+.leaflet-container {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .leaflet-tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(0.8);
+}
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -80,7 +90,9 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 }
-
+.root{
+  background: black;
+}
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -123,4 +135,17 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
 }

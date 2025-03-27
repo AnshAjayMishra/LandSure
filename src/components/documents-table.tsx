@@ -1,4 +1,3 @@
-// components/documents-table.tsx
 "use client";
 
 import {
@@ -11,8 +10,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Download, ShieldCheck } from "lucide-react";
-import { cn } from "@/lib/utils"; // Assuming you have a utility class helper
+import { FileText, Download, ShieldCheck, Trash2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export type DocumentStatus = "valid" | "tampered" | "pending";
 
@@ -27,6 +26,7 @@ export type Document = {
 interface DocumentTableProps {
   documents: Document[];
   onVerify?: (documentId: string) => void;
+  onDelete?: (documentId: string) => void;
 }
 
 const statusVariantMap: Record<DocumentStatus, "default" | "destructive" | "secondary"> = {
@@ -35,7 +35,7 @@ const statusVariantMap: Record<DocumentStatus, "default" | "destructive" | "seco
   pending: "secondary",
 };
 
-export function DocumentTable({ documents = [], onVerify }: DocumentTableProps) {
+export function DocumentTable({ documents = [], onVerify, onDelete }: DocumentTableProps) {
   const handleDownload = (url: string, filename: string) => {
     const link = document.createElement('a');
     link.href = url;
@@ -49,10 +49,10 @@ export function DocumentTable({ documents = [], onVerify }: DocumentTableProps) 
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[40%]">Document Name</TableHead>
+          <TableHead className="w-[35%]">Document Name</TableHead>
           <TableHead className="w-[20%]">Upload Date</TableHead>
-          <TableHead className="w-[20%]">Status</TableHead>
-          <TableHead className="text-right w-[20%]">Actions</TableHead>
+          <TableHead className="w-[15%]">Status</TableHead>
+          <TableHead className="text-right w-[30%]">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -94,12 +94,22 @@ export function DocumentTable({ documents = [], onVerify }: DocumentTableProps) 
                   </Button>
                   <Button
                     size="sm"
+                    variant={document.status === 'valid' ? 'default' : 'secondary'}
                     disabled={document.status === "pending"}
                     onClick={() => onVerify?.(document.id)}
-                    aria-label={`Verify ${document.name}`}
+                    aria-label={`${document.status === 'valid' ? 'Unverify' : 'Verify'} ${document.name}`}
                   >
                     <ShieldCheck className="h-4 w-4 mr-2" />
-                    Verify
+                    {document.status === 'valid' ? 'Unverify' : 'Verify'}
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => onDelete?.(document.id)}
+                    aria-label={`Delete ${document.name}`}
+                  >
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Delete
                   </Button>
                 </div>
               </TableCell>

@@ -23,7 +23,7 @@ export default function UserLayout({
     { name: "Dashboard", href: "/dashboard/user", icon: <Home /> },
     { name: "My Properties", href: "/dashboard/user/properties", icon: <Landmark /> },
     { name: "Documents", href: "/dashboard/user/documents", icon: <FileText /> },
-    { name: "Verify Document", href: "/dashboard/user/verify", icon: <ShieldCheck /> },
+    { name: "Upload Document", href: "/dashboard/user/upload", icon: <ShieldCheck /> },
     { name: "Profile & Settings", href: "/dashboard/user/profile", icon: <Settings /> },
   ];
 

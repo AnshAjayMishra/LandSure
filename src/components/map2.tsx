@@ -1,94 +1,60 @@
 'use client';
 
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Property } from "@/components/properties-table";
-import { FeatureCollection, Polygon } from 'geojson';
+
+// Configure default marker icons
+const DefaultIcon = L.icon({
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  shadowSize: [41, 41]
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 interface MapComponentProps {
   properties: Property[];
   selected: Property | null;
 }
 
-// GeoJSON data for three sample regions
-const geojsonData: FeatureCollection<Polygon>[] = [
+// Updated city areas with precise coordinates
+const cityAreas = [
   {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        properties: { name: "Region 1" },
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              [74.033203125, 24.8465653482197],
-              [75.033203125, 24.8465653482197],
-              [75.033203125, 25.8465653482197],
-              [74.033203125, 25.8465653482197],
-              [74.033203125, 24.8465653482197]
-            ]
-          ]
-        }
-      }
-    ]
+    name: "Mira-Bhayandar, Mumbai",
+    center: [19.2869, 72.8422] as [number, number],
+    radius: 2000,
+    description: "Prime residential area in Mumbai suburbs"
   },
   {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        properties: { name: "Region 2" },
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              [76.033203125, 22.8465653482197],
-              [77.033203125, 22.8465653482197],
-              [77.033203125, 23.8465653482197],
-              [76.033203125, 23.8465653482197],
-              [76.033203125, 22.8465653482197]
-            ]
-          ]
-        }
-      }
-    ]
+    name: "Central Delhi",
+    center: [28.6139, 77.2090] as [number, number],
+    radius: 5000,
+    description: "Metropolitan hub in capital city"
   },
   {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        properties: { name: "Region 3" },
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              [78.033203125, 20.8465653482197],
-              [79.033203125, 20.8465653482197],
-              [79.033203125, 21.8465653482197],
-              [78.033203125, 21.8465653482197],
-              [78.033203125, 20.8465653482197]
-            ]
-          ]
-        }
-      }
-    ]
+    name: "Indore City",
+    center: [22.7196, 75.8577] as [number, number],
+    radius: 3000,
+    description: "Developing commercial/residential zone"
   }
 ];
 
 export function MapComponent1({ properties, selected }: MapComponentProps) {
-  const position: [number, number] = [23.4733, 77.947998]; // Central position
+  const position: [number, number] = [23.2599, 77.4126]; // Central India coordinates
   const zoomLevel = 6;
 
-  // Style for the highlighted regions
-  const geojsonStyle = {
-    color: "#3388ff",
-    weight: 2,
-    opacity: 0.7,
-    fillColor: "#3388ff",
-    fillOpacity: 0.1
+  // Circle styling
+  const areaStyle = {
+    color: "#ff7800",
+    fillColor: "#ff7800",
+    fillOpacity: 0.2,
+    weight: 2
   };
 
   return (
@@ -101,28 +67,36 @@ export function MapComponent1({ properties, selected }: MapComponentProps) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      
-      {/* Add GeoJSON overlays for multiple regions */}
-      {geojsonData.map((geojson, index) => (
-        <GeoJSON
-          key={index}
-          data={geojson}
-          style={geojsonStyle}
-          onEachFeature={(feature, layer) => {
-            layer.bindPopup(feature.properties?.name || "Unnamed Region");
-          }}
-        />
+
+      {/* City area circles */}
+      {cityAreas.map((area, index) => (
+        <Circle
+          key={`area-${index}`}
+          center={area.center}
+          radius={area.radius}
+          pathOptions={areaStyle}
+        >
+          <Popup>
+            <div className="font-bold text-sm mb-1">{area.name}</div>
+            <div className="text-xs">{area.description}</div>
+            <div className="text-xs text-gray-500">Radius: {area.radius/1000}km</div>
+          </Popup>
+        </Circle>
       ))}
-      
-      {/* Add Property Markers */}
+
+      {/* Property markers */}
       {properties.map((property) => {
         const coordinates = propertyToCoordinates(property);
-
         if (!coordinates) return null;
 
         return (
-          <Marker key={property.id} position={coordinates as [number, number]}>
-            <Popup>{property.name}</Popup>
+          <Marker key={property.id} position={coordinates}>
+            <Popup className="text-sm">
+              <div className="font-medium">{property.name}</div>
+              {property.address && (
+                <div className="text-xs text-gray-600">{property.address}</div>
+              )}
+            </Popup>
           </Marker>
         );
       })}
@@ -130,7 +104,6 @@ export function MapComponent1({ properties, selected }: MapComponentProps) {
   );
 }
 
-// Helper function for property coordinates
 function propertyToCoordinates(property: Property): [number, number] | null {
   if (property.latitude && property.longitude) {
     return [property.latitude, property.longitude];

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useDropzone } from "react-dropzone";
 import { useState } from "react";
 
-export default function VerifyDocument() {
+export default function UploadDocument() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<{
     status: "valid" | "invalid" | "error";
@@ -43,7 +43,7 @@ export default function VerifyDocument() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Verify Document</h1>
+      <h1 className="text-3xl font-bold">Upload Document</h1>
 
       <Card className="p-6">
         <div className="space-y-4">
@@ -61,7 +61,7 @@ export default function VerifyDocument() {
             disabled={!file}
             className="w-full"
           >
-            Verify Document
+            Upload Document
           </Button>
 
           {result && (

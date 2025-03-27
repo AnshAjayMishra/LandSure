@@ -4,7 +4,19 @@ import React from 'react';
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AnimatedGridPatternDemo } from './uicomps/AnimatedGridPattern';
+import { SignInButton as ClerkSignInButton } from "@clerk/nextjs";
 
+export const SignInButton = () => {
+  return (
+    <ClerkSignInButton mode="modal" redirectUrl="/dashboard/user">
+      <button 
+        className="w-full md:w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+      >
+        Get Started
+      </button>
+    </ClerkSignInButton>
+  );
+};
 
 export default function Hero() {
   return (
@@ -58,9 +70,7 @@ export default function Hero() {
             transition={{ duration: 0.3, delay: 1 }}
             className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
           >
-            <button className="w-full md:w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-              Get Started
-            </button>
+            <SignInButton />
             <button className="w-full md:w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
               Learn More
             </button>
@@ -73,8 +83,8 @@ export default function Hero() {
             className="relative z-10 mt-20 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
           >
             <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
-            <Image
-                src="/images/1.png"  // Corrected image path
+              <Image
+                src="/images/1.png"
                 alt="LandSure Platform Preview"
                 className="aspect-[16/9] h-auto w-full object-cover pointer-events-none"
                 width={1600}

@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 import {
   Activity,
   Landmark,
@@ -16,6 +17,7 @@ import {
   FileText,
   ShieldCheck,
   Database,
+  FileCheck2
 } from "lucide-react";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
@@ -131,6 +133,11 @@ export default function Dashboard() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Land Registry Dashboard</h1>
         <div className="flex items-center gap-4">
+        <Link href="/dashboard/admin/document">
+      <Button variant="ghost" size="icon">
+        <FileCheck2 className="h-6 w-6" />
+      </Button>
+    </Link>
           <Button variant="ghost" size="icon">
             <Bell className="h-6 w-6" />
           </Button>

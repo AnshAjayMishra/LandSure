@@ -14,7 +14,7 @@ export function InfiniteMovingCardsDemo() {
       <div className="h-[40rem] max-w-7xl mx-auto rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden ">
       <section className="mb-20 flex items-center  justify-center py-8">
         <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-white">
-          Testimonial
+          Testimonials
         </h1>
       </section>
         <InfiniteMovingCards

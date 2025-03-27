@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { DocumentTable } from '@/components/documents-table1';
-
+import { DocumentTable } from '@/components/documents-table';
 
 export default function DocumentPage() {
   const [documents, setDocuments] = useState([
@@ -45,7 +44,7 @@ export default function DocumentPage() {
   return (
     <div className="p-8 max-w-6xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white ">Documents Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Documents Dashboard</h1>
         <p className="text-gray-600 dark:text-gray-400 mt-2">Manage your verified documents</p>
       </div>
       

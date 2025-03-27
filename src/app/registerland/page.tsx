@@ -49,7 +49,7 @@ export default function LandRegistrationForm() {
 
   return (
     <div className="dark:bg-black bg-white min-h-screen p-8">
-      <div className="max-w-4xl mx-auto dark:bg-gray-900 bg-gray-50 p-8 rounded-xl shadow-lg">
+      <div className="max-w-4xl mx-auto dark:bg-zinc-900 bg-gray-50 p-8 rounded-xl shadow-lg">
         <h1 className="text-3xl font-bold mb-8 dark:text-white text-black">
           Land Registration Form
         </h1>
@@ -72,7 +72,7 @@ export default function LandRegistrationForm() {
                       <Input 
                         placeholder="ABCDE1234F" 
                         {...field} 
-                        className="dark:bg-gray-800 bg-white"
+                        className="dark:bg-zinc-900 bg-white"
                       />
                     </FormControl>
                     <FormMessage />
@@ -90,7 +90,7 @@ export default function LandRegistrationForm() {
                       <Input
                         placeholder="1234 5678 9012"
                         {...field}
-                        className="dark:bg-gray-800 bg-white"
+                        className="dark:bg-zinc-900 bg-white"
                       />
                     </FormControl>
                     <FormMessage />
@@ -117,7 +117,7 @@ export default function LandRegistrationForm() {
                           type="number"
                           placeholder="5.0"
                           {...field}
-                          className="dark:bg-gray-800 bg-white"
+                          className="dark:bg-zinc-900 bg-white"
                         />
                       </FormControl>
                       <FormMessage />
@@ -135,7 +135,7 @@ export default function LandRegistrationForm() {
                         <Input
                           placeholder="SRV-12345"
                           {...field}
-                          className="dark:bg-gray-800 bg-white"
+                          className="dark:bg-zinc-900 bg-white"
                         />
                       </FormControl>
                       <FormMessage />
@@ -154,7 +154,7 @@ export default function LandRegistrationForm() {
                       <Textarea
                         placeholder="Full address of the land"
                         {...field}
-                        className="dark:bg-gray-800 bg-white"
+                        className="dark:bg-zinc-900 bg-white"
                       />
                     </FormControl>
                     <FormMessage />
@@ -180,7 +180,7 @@ export default function LandRegistrationForm() {
                         <Input
                           placeholder="District name"
                           {...field}
-                          className="dark:bg-gray-800 bg-white"
+                          className="dark:bg-zinc-900 bg-white"
                         />
                       </FormControl>
                       <FormMessage />
@@ -198,7 +198,7 @@ export default function LandRegistrationForm() {
                         <Input
                           placeholder="State name"
                           {...field}
-                          className="dark:bg-gray-800 bg-white"
+                          className="dark:bg-zinc-900 bg-white"
                         />
                       </FormControl>
                       <FormMessage />
@@ -216,7 +216,7 @@ export default function LandRegistrationForm() {
                         <Input
                           placeholder="Country name"
                           {...field}
-                          className="dark:bg-gray-800 bg-white"
+                          className="dark:bg-zinc-900 bg-white"
                         />
                       </FormControl>
                       <FormMessage />
@@ -243,7 +243,7 @@ export default function LandRegistrationForm() {
                         type="file"
                         accept=".pdf"
                         onChange={(e) => field.onChange(e.target.files?.[0])}
-                        className="dark:bg-gray-800 bg-white"
+                        className="dark:bg-zinc-900 bg-white"
                       />
                     </FormControl>
                     <FormMessage />
@@ -254,7 +254,7 @@ export default function LandRegistrationForm() {
 
             <Button 
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900"
+              className="w-full bg-zinc-800 dark:text-white hover:bg-zinc-900"
             >
               Submit Registration
             </Button>

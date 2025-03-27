@@ -17,7 +17,8 @@ import {
   FileText,
   ShieldCheck,
   Database,
-  FileCheck2
+  FileCheck2,
+  ListCollapse
 } from "lucide-react";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
@@ -133,6 +134,11 @@ export default function Dashboard() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Land Registry Dashboard</h1>
         <div className="flex items-center gap-4">
+        <Link href="/dashboard/admin/requests">
+  <Button variant="ghost" size="icon">
+    <ListCollapse className="h-6 w-6" />
+  </Button>
+</Link>
         <Link href="/dashboard/admin/document">
       <Button variant="ghost" size="icon">
         <FileCheck2 className="h-6 w-6" />

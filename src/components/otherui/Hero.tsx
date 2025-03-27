@@ -76,7 +76,7 @@ export default function Hero() {
             <Image
                 src="/images/1.png"  // Corrected image path
                 alt="LandSure Platform Preview"
-                className="aspect-[16/9] h-auto w-full object-cover"
+                className="aspect-[16/9] h-auto w-full object-cover pointer-events-none"
                 width={1600}
                 height={900}
                 priority
